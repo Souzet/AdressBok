@@ -30,17 +30,17 @@ namespace AdressBok
             Console.WriteLine(" Hej och vällkommen till Adressboken");
             Console.WriteLine("skriv sluta för att sluta");
             string command; /*= Console.ReadLine();*/
-            do
-            {
-                Console.WriteLine("> ");
-                command = Console.ReadLine();
-                if (command == "sluta")
-                {
-                    Console.WriteLine("Adjö");
-                }
+            //do
+            //{
+            //    Console.WriteLine("> ");
+            //    command = Console.ReadLine();
+            //    if (command == "sluta")
+            //    {
+            //        Console.WriteLine("Adjö");
+            //    }
 
-            }
-            while
+            //}
+            //while
 
         }
 
