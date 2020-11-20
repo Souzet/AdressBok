@@ -9,13 +9,24 @@ namespace AdressBok
 {
     class Program
     {
+        /* CLASS: Person
+         * PURPOSE: CREAT A NEW CONTACT IN THE ADDRESS BOOK*/
         class Person
         {
             public string name, adress, telefon, Email;
+            /* METHOD: PERSON
+            * PURPOSE: CREATE A PERSON
+            * PARAMETERS: PERSON NAME, PERSON ADDRESS, PERSON PHONE, PERSON EMAIL
+            * RETURN VALUE: RETURN A PERSON BUILDING WITH 4 PARAMETERS*/         
             public Person(string N, string A, string T, string E)
             {
                 name = N; adress = A; telefon = T; Email = E;
             }
+            /* METHOD: PRINT
+            * PURPOSE: SHOW A PERSON INFORMATION
+            * PARAMETERS: EMPTY
+            * RETURN VALUE: SHOW A PERSON
+            * RETURN VALUE: SHOW A PERSON BY CLASS PERSON PROPERTIES*/
             public void Print()
             {
                 Console.WriteLine(
@@ -28,7 +39,6 @@ namespace AdressBok
             Console.WriteLine("Hej och vällkommen till Adressbok");
             Console.WriteLine("skriv sluta för att sluta");
             string fileAdressBok = @"C:\Users\souzet\Documents\Adressbok.txt";
-
             string command; /*= Console.ReadLine();*/
             do
             {
