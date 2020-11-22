@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdressBok
+namespace Inlamning_2ra_Kod
 {
     class Program
     {
@@ -17,7 +17,7 @@ namespace AdressBok
             /* METHOD: PERSON
             * PURPOSE: CREATE A PERSON
             * PARAMETERS: PERSON NAME, PERSON ADDRESS, PERSON PHONE, PERSON EMAIL
-            * RETURN VALUE: RETURN A PERSON BUILDING WITH 4 PARAMETERS*/         
+            * RETURN VALUE: RETURN A PERSON BUILDING WITH 4 PARAMETERS*/
             public Person(string N, string A, string T, string E)
             {
                 name = N; adress = A; telefon = T; Email = E;
@@ -25,13 +25,7 @@ namespace AdressBok
             /* METHOD: PRINT
             * PURPOSE: SHOW A PERSON INFORMATION
             * PARAMETERS: EMPTY
-            * RETURN VALUE: SHOW A PERSON
-            * RETURN VALUE: SHOW A PERSON BY CLASS PERSON PROPERTIES*/
-            public void Print()
-            {
-                Console.WriteLine(
-                $"{name} adress:{adress}, tel:{telefon}, Email:{Email}");
-            }
+            * RETURN VALUE: SHOW A PERSON BY CLASS PERSON PROPERTIES*/            
         }
         static void Main(string[] args)
         {
@@ -39,7 +33,7 @@ namespace AdressBok
             Console.WriteLine("Hej och vällkommen till Adressbok");
             Console.WriteLine("skriv sluta för att sluta");
             string fileAdressBok = @"C:\Users\souzet\Documents\Adressbok.txt";
-            string command; /*= Console.ReadLine();*/
+            string command;
             do
             {
                 Console.Write("> ");
@@ -66,24 +60,11 @@ namespace AdressBok
                 }
                 else if (command == "ny person")
                 {
-                    Console.WriteLine("Skriv förnamn och efternamn: ");
-                    string nameOne = Console.ReadLine();
-                    Console.WriteLine("Skriv adress till " + nameOne);
-                    string telOne = Console.ReadLine();
-                    Console.WriteLine("Skriv tel. till " + nameOne);
-                    string adressOne = Console.ReadLine();
-                    Console.WriteLine("Skriv E-mail till " + nameOne);
-                    string mailOne = Console.ReadLine();
-                    Console.WriteLine(nameOne + adressOne + telOne + mailOne);
-                    Person P = new Person(nameOne, adressOne, telOne, mailOne);
-                    addressList.Add(P);
+                    AddPerson(addressList);
                 }
                 else if (command == "visa")
                 {
-                    for (int i = 0; i < addressList.Count(); i++)
-                    {
-                        addressList[i].Print();
-                    }
+                    PrintPerson(addressList);
                 }
 
                 else if (command == "spara")
@@ -107,24 +88,8 @@ namespace AdressBok
                 }
                 else if (command == "ta bort")
                 {
-                    Console.WriteLine(" Vilket namn vill du ta bort:   ");
-                    string delete = Console.ReadLine();
-                    int found = -1;
-                    for (int i = 0; i < addressList.Count(); i++)
-                    {
-                        if (addressList[i].name == delete)
-                        {
-                            found = i;
-                        }
-                    }
-                    if (found != -1)
-                    {
-                        addressList.RemoveAt(found);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Kunde inte hitta {delete}");
-                    }
+
+                    DeletPerson(addressList);
                 }
                 else
                 {
@@ -132,8 +97,106 @@ namespace AdressBok
                 }
             }
             while (command != "sluta");
-
         }
-
+        /* CONSTRUCTOR: AddPerson  STATIC
+         * PURPOSE: ASK USER TO ENTER NEW PERSON INFO
+         */
+        static void AddPerson(List<Person> addressList)
+        {
+            Console.WriteLine(" Skriv den nya person");
+            Console.Write(" ange namn:    ");
+            string name = Console.ReadLine();
+            Console.Write("  ange adress:    ");
+            string telefon = Console.ReadLine();
+            Console.Write("  ange telefon:   ");
+            string adress = Console.ReadLine();
+            Console.Write("  ange email   ");
+            string email = Console.ReadLine();
+            addressList.Add(new Person(name, adress, telefon, email));
+        }
+        /* METHOD: DeletPerson  STATIC
+         * PURPOSE: DELETE AII INFO THAT USER INDICATE IT BY NAME
+         * PARAMETERS: DELETE FROM List<Person>addressList
+         * RETURN VALUE: UPPDATING List<Person>addressList
+         */
+        static void DeletPerson(List<Person> addressList)
+        {
+            Console.WriteLine(" Vilket namn vill du ta bort:   ");
+            string delete = Console.ReadLine();
+            int found = -1;
+            for (int i = 0; i < addressList.Count(); i++)
+            {
+                if (addressList[i].name == delete)
+                {
+                    found = i;
+                }
+            }
+            if (found != -1)
+            {
+                addressList.RemoveAt(found);
+            }
+            else
+            {
+                Console.WriteLine($"Kunde inte hitta {delete}");
+            }
+        }
+        /* Method: PrintPerson   STATIC
+         * PURPOSE: SHOW A PERSON INFORMATION 
+         * PARAMETERS: EMPTY
+         * RETURN VALUE: EMPTY
+         */
+        static void PrintPerson(List<Person> addressList)
+        {
+            for (int i = 0; i < addressList.Count(); i++)
+            {
+                Person T = addressList[i];
+                Console.WriteLine("{0}, {1}, {2}, {3}" ,T.name, T.adress, T.telefon, T.Email);
+            }
+        }
+        /* Method: ChangePerson   STATIC
+         * PURPOSE: INSERT A NEW INFO TO CURRENT PERSON 
+         * PARAMETERS: string ToChange WHICH PERSON WANTS USER TO DO CHANGE IN IT
+         *             string FieldToChange THE FIELD IN PERSON THAT USER WANTS TO CHANGE
+         *             string NewValue
+         * RETURN VALUE: EMPTY
+         */
+        static void ChangePerson(List<Person> addressList)
+        {
+            Console.Write("Ange namn som du vill ändra:  ");
+            string ToChange = Console.ReadLine();
+            int find = -1;
+            for (int i = 0; i < addressList.Count(); i++)
+            {
+                if (addressList[i].name == ToChange)
+                    find = 1;
+            }
+            if (find == -1)
+            {
+                Console.WriteLine($"Kunde inte hitta {0}", ToChange);
+            }
+            else
+            {
+                Console.Write("Vad vill du ändra (namn, adress, telefon, email): ");
+                string FToChange = Console.ReadLine();
+                Console.Write("Änge den nya ändring på {0}: ", FToChange);
+                string NewValue = Console.ReadLine();
+                switch (FToChange)
+                {
+                    case "name":
+                        addressList[find].name = NewValue;
+                        break;
+                    case "adress":
+                        addressList[find].adress = NewValue;
+                        break;
+                    case "telefon":
+                        addressList[find].telefon = NewValue;
+                        break;
+                    case "email":
+                        addressList[find].Email = NewValue;
+                        break;
+                    default: break;
+                }
+            }
+        }
     }
 }
