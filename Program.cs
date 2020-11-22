@@ -14,6 +14,7 @@ namespace Inlamning_2ra_Kod
         class Person
         {
             public string name, adress, telefon, Email;
+
             /* METHOD: PERSON
             * PURPOSE: CREATE A PERSON
             * PARAMETERS: PERSON NAME, PERSON ADDRESS, PERSON PHONE, PERSON EMAIL
@@ -90,6 +91,10 @@ namespace Inlamning_2ra_Kod
                 {
 
                     DeletPerson(addressList);
+                }
+                else if ( command == "ändra")
+                {
+                    ChangePerson(addressList);
                 }
                 else
                 {
